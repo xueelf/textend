@@ -1,3 +1,14 @@
-.DS_Store
-dist/
+# Dependencies
 node_modules/
+
+# Build output
+dist/
+dist-ssr/
+*.local
+
+# Rust / Tauri
+src-tauri/target/
+src-tauri/gen/schemas/
+
+# OS
+.DS_Store

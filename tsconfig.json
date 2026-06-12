@@ -36,6 +36,5 @@
   "include": [
     "*.config.ts",
     "src"
-  ],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  ]
 }

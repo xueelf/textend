@@ -1,4 +1,4 @@
-import { basicSetup, EditorView } from 'codemirror';
+import { minimalSetup, EditorView } from 'codemirror';
 import { useEffect, useRef } from 'preact/hooks';
 
 import './App.css';
@@ -10,8 +10,9 @@ function App() {
     if (!editorRef.current) {
       return;
     }
+
     const view = new EditorView({
-      extensions: [basicSetup],
+      extensions: [minimalSetup],
       parent: editorRef.current,
     });
 

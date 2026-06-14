@@ -5,6 +5,7 @@
     "": {
       "name": "textend",
       "dependencies": {
+        "@tabler/icons": "^3.44.0",
         "@tauri-apps/api": "^2",
         "@tauri-apps/plugin-opener": "^2",
         "codemirror": "^6.0.2",
@@ -120,6 +121,8 @@
     "@simple-libs/child-process-utils": ["@simple-libs/child-process-utils@1.0.2", "", { "dependencies": { "@simple-libs/stream-utils": "^1.2.0" } }, "sha512-/4R8QKnd/8agJynkNdJmNw2MBxuFTRcNFnE5Sg/G+jkSsV8/UBgULMzhizWWW42p8L5H7flImV2ATi79Ove2Tw=="],
 
     "@simple-libs/stream-utils": ["@simple-libs/stream-utils@1.2.0", "", {}, "sha512-KxXvfapcixpz6rVEB6HPjOUZT22yN6v0vI0urQSk1L8MlEWPDFCZkhw2xmkyoTGYeFw7tWTZd7e3lVzRZRN/EA=="],
+
+    "@tabler/icons": ["@tabler/icons@3.44.0", "", {}, "sha512-Wn0AOZG9sg0L+bjfMqq4eNhC6pQjIrk94LvvWYNYkY8KH8wC3YILRzQlrnVJc4FUeMxH/AK97QsYCX35H3LndA=="],
 
     "@tauri-apps/api": ["@tauri-apps/api@2.11.0", "", {}, "sha512-7CinYODhky9lmO23xHnUFv0Xt43fbtWMyxZcLcRBlFkcgXKuEirBvHpmtJ89YMhyeGcq20Wuc47Fa4XjyniywA=="],
 

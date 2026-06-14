@@ -1,0 +1,7 @@
+.editor {
+  flex: 1;
+
+  .cm-editor {
+    height: 100%;
+  }
+}

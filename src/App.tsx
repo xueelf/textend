@@ -1,11 +1,12 @@
-import { Editor } from './components/Editor';
+import { Editor } from './views/Editor';
+
 import './App.css';
 
 function App() {
   return (
-    <div class="app">
+    <>
       <Editor />
-    </div>
+    </>
   );
 }
 

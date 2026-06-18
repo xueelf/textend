@@ -4,11 +4,12 @@ import { useEditor } from '@/hooks';
 
 export function Editor() {
   const editorRef = useRef<HTMLDivElement>(null);
-  const { initEditor } = useEditor();
+  const { initEditor, focus } = useEditor();
 
   useEffect(() => {
     if (editorRef.current) {
       initEditor(editorRef.current);
+      focus();
     }
   }, []);
 

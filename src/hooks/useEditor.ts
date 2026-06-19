@@ -39,10 +39,15 @@ export function useEditor() {
     });
   }
 
+  function getText(): string {
+    return getView().state.doc.toString();
+  }
+
   return {
     initEditor,
     selectLineAt,
     focus,
     setText,
+    getText,
   };
 }

@@ -1,7 +1,7 @@
 import { foldGutter } from '@codemirror/language';
 import { BlockInfo, EditorView, lineNumbers } from '@codemirror/view';
 
-import { selectLineAt } from '../utils/editor';
+import { selectLineAt } from '@/utils/editor';
 
 function selectLineOnMouseDown(
   view: EditorView,

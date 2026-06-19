@@ -17,11 +17,12 @@ function normalize(raw: string): string {
   if (mods.has('shift')) {
     ordered.push('Shift');
   }
+
   ordered.push(key.length === 1 ? key.toLowerCase() : key);
   return ordered.join('-');
 }
 
-export function fromEvent(event: KeyboardEvent): string | null {
+function fromEvent(event: KeyboardEvent): string | null {
   const { key, ctrlKey, altKey, metaKey, shiftKey } = event;
 
   if (!key || key === 'Unidentified') {
@@ -49,7 +50,7 @@ export function useHotkeys(hotkeys: string, callback: Handler) {
   registry.set(normalize(hotkeys), callback);
 }
 
-export function dispatchHotkey(event: KeyboardEvent) {
+export function dispatch(event: KeyboardEvent) {
   const key = fromEvent(event);
 
   if (!key) {

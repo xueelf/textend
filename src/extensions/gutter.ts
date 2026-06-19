@@ -3,6 +3,7 @@ import { BlockInfo, EditorView, lineNumbers } from '@codemirror/view';
 
 import { selectLineAt } from '@/utils/editor';
 
+// 行号区域 mousedown 事件处理：阻止默认行为并选中整行。
 function selectLineOnMouseDown(
   view: EditorView,
   block: BlockInfo,
@@ -15,6 +16,7 @@ function selectLineOnMouseDown(
   return true;
 }
 
+/** 行号与代码折叠的 CodeMirror 扩展配置。 */
 export const gutter = [
   lineNumbers({
     domEventHandlers: {

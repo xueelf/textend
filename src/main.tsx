@@ -1,5 +1,11 @@
 import { render } from 'preact';
 
-import App from './App';
+import App from '@/App';
+import { HotkeysProvider } from '@/components/HotkeysProvider';
 
-render(<App />, document.getElementById('app')!);
+render(
+  <HotkeysProvider>
+    <App />
+  </HotkeysProvider>,
+  document.getElementById('app')!,
+);

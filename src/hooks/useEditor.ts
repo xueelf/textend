@@ -2,7 +2,7 @@ import { EditorView, minimalSetup } from 'codemirror';
 import { useRef } from 'preact/hooks';
 
 import { gutter } from '@/extensions/gutter';
-import { selectLineAt as selectLineAtUtil } from '@/utils/editor';
+import { setLineSelection, cursorPosition, byteSize } from '@/utils/editor';
 
 /**
  * CodeMirror 编辑器操作 hook。
@@ -40,7 +40,25 @@ export function useEditor() {
    * @param lineNumber - 行号（从 1 开始）
    */
   function selectLineAt(lineNumber: number) {
-    selectLineAtUtil(getView(), lineNumber);
+    setLineSelection(getView(), lineNumber);
+  }
+
+  /**
+   * 获取光标所在行号和列号。
+   *
+   * @returns 行号（1-based）与列号（1-based）
+   */
+  function getCursorPosition(): { line: number; column: number } {
+    return cursorPosition(getView());
+  }
+
+  /**
+   * 获取文档的 UTF-8 字节大小。
+   *
+   * @returns 字节数
+   */
+  function getByteSize(): number {
+    return byteSize(getView());
   }
 
   /** 将焦点设置到编辑器。 */
@@ -73,6 +91,8 @@ export function useEditor() {
   return {
     initEditor,
     selectLineAt,
+    getCursorPosition,
+    getByteSize,
     focus,
     setText,
     getText,

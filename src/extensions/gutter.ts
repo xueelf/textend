@@ -1,7 +1,7 @@
 import { foldGutter } from '@codemirror/language';
 import { BlockInfo, EditorView, lineNumbers } from '@codemirror/view';
 
-import { selectLineAt } from '@/utils/editor';
+import { setLineSelection } from '@/utils/editor';
 
 // 行号区域 mousedown 事件处理：阻止默认行为并选中整行。
 function selectLineOnMouseDown(
@@ -12,7 +12,7 @@ function selectLineOnMouseDown(
   const line = view.state.doc.lineAt(block.from);
 
   event.preventDefault();
-  selectLineAt(view, line.number);
+  setLineSelection(view, line.number);
   return true;
 }
 

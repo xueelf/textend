@@ -22,7 +22,10 @@ export function setLineSelection(view: EditorView, lineNumber: number) {
  * @param view - CodeMirror EditorView 实例
  * @returns 行号（1-based）与列号（1-based）
  */
-export function cursorPosition(view: EditorView): { line: number; column: number } {
+export function cursorPosition(view: EditorView): {
+  line: number;
+  column: number;
+} {
   const pos = view.state.selection.main.head;
   const line = view.state.doc.lineAt(pos);
 

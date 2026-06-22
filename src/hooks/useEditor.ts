@@ -2,7 +2,7 @@ import { EditorView, minimalSetup } from 'codemirror';
 import { useRef } from 'preact/hooks';
 
 import { gutter } from '@/extensions/gutter';
-import { setLineSelection, cursorPosition, byteSize } from '@/utils/editor';
+import { byteSize, cursorPosition, setLineSelection } from '@/utils/editor';
 
 /**
  * CodeMirror 编辑器操作 hook。

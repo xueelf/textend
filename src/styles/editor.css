@@ -2,6 +2,7 @@
   flex: 1;
 
   .cm-editor {
+    font-family: monospace;
     height: 100%;
 
     &.cm-focused {

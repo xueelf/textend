@@ -4,10 +4,17 @@ import { useEditor } from '@/hooks';
 import { useHotkeys } from '@/hooks/useHotkeys';
 import { editorStatus, setEditorStatus } from '@/stores/editor';
 import { openFile, saveFile, saveFileAs } from '@/utils/file';
+import { clearSession } from '@/utils/session';
 
 export function Editor() {
   const editorRef = useRef<HTMLDivElement>(null);
   const { initEditor, focus, setText, getText } = useEditor();
+
+  useHotkeys('Mod-w', async () => {
+    await clearSession();
+    setText('');
+    setEditorStatus({ path: null });
+  });
 
   useHotkeys('Mod-o', async () => {
     const result = await openFile();
@@ -16,7 +23,6 @@ export function Editor() {
       return;
     }
     setEditorStatus({ path: result.path });
-
     setText(result.data);
   });
 

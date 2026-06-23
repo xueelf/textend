@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'preact/hooks';
 
 import { useEditor } from '@/hooks';
 import { useHotkeys } from '@/hooks/useHotkeys';
-import { filePath } from '@/stores/editor';
+import { editorStatus } from '@/stores/editor';
 import { openFile, saveFile, saveFileAs } from '@/utils/file';
 
 export function Editor() {
@@ -15,14 +15,14 @@ export function Editor() {
     if (!result) {
       return;
     }
-    filePath.value = result.path;
+    editorStatus.value = { ...editorStatus.value, path: result.path };
 
     setText(result.data);
   });
 
   useHotkeys('Mod-s', async () => {
     const data = getText();
-    const path = filePath.value;
+    const path = editorStatus.value.path;
 
     if (path) {
       await saveFile(path, data);
@@ -30,7 +30,7 @@ export function Editor() {
       const newPath = await saveFileAs(data);
 
       if (newPath) {
-        filePath.value = newPath;
+        editorStatus.value = { ...editorStatus.value, path: newPath };
       }
     }
   });

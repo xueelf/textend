@@ -7,13 +7,22 @@
   color: #6e6e73;
   border-top: 1px solid rgba(0, 0, 0, 0.08);
   font-size: 11px;
-  user-select: none;
-  -webkit-user-select: none;
-}
 
-.status-bar__path {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 40%;
+  .status-bar__spacer {
+    flex: 1;
+  }
+
+  .status-bar__path {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 40%;
+  }
+
+  .status-bar__item {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 4px;
+    border-radius: 4px;
+  }
 }

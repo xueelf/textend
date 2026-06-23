@@ -1,9 +1,13 @@
+import { getCurrentWindow } from '@tauri-apps/api/window';
+import { readTextFile } from '@tauri-apps/plugin-fs';
 import { EditorView, minimalSetup } from 'codemirror';
 import { useRef } from 'preact/hooks';
 
 import { gutter } from '@/extensions/gutter';
 import { status } from '@/extensions/status';
+import { editorStatus, setEditorStatus } from '@/stores/editor';
 import { setLineSelection } from '@/utils/editor';
+import { loadSession, saveSession } from '@/utils/session';
 
 /**
  * CodeMirror 编辑器操作 hook。
@@ -14,15 +18,41 @@ export function useEditor() {
   const viewRef = useRef<EditorView | null>(null);
 
   /**
-   * 在指定 DOM 容器中初始化 CodeMirror 编辑器。
+   * 在指定 DOM 容器中初始化 CodeMirror 编辑器，
+   * 恢复上次会话并注册窗口关闭前保存逻辑。
    *
    * @param container - 用于挂载编辑器的 DOM 元素
    */
-  function initEditor(container: HTMLDivElement) {
+  async function initEditor(container: HTMLDivElement) {
     viewRef.current = new EditorView({
       extensions: [gutter, minimalSetup, status],
       parent: container,
     });
+
+    await getCurrentWindow().onCloseRequested(async () => {
+      await saveSession({
+        path: editorStatus.value.path,
+        text: getText(),
+      });
+    });
+
+    const session = await loadSession();
+
+    if (session) {
+      if (session.path) {
+        try {
+          const text = await readTextFile(session.path);
+
+          setText(text);
+          setEditorStatus({ path: session.path });
+        } catch {
+          setText(session.text);
+          setEditorStatus({ path: null });
+        }
+      } else {
+        setText(session.text);
+      }
+    }
   }
 
   // 获取 EditorView 实例，未初始化时抛出错误。

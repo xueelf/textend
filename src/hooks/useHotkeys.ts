@@ -7,7 +7,7 @@ const registry = new Map<string, Handler>();
 function normalize(raw: string): string {
   const parts = raw.split('-');
   const key = parts.pop() ?? '';
-  const mods = new Set(parts.map(p => p.toLowerCase()));
+  const mods = new Set(parts.map(part => part.toLowerCase()));
   const ordered: string[] = [];
 
   if (mods.has('mod') || mods.has('cmd') || mods.has('meta')) {

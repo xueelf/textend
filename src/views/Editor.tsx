@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'preact/hooks';
 
 import { useEditor } from '@/hooks';
 import { useHotkeys } from '@/hooks/useHotkeys';
-import { editorStatus } from '@/stores/editor';
+import { editorStatus, setEditorStatus } from '@/stores/editor';
 import { openFile, saveFile, saveFileAs } from '@/utils/file';
 
 export function Editor() {
@@ -15,7 +15,7 @@ export function Editor() {
     if (!result) {
       return;
     }
-    editorStatus.value = { ...editorStatus.value, path: result.path };
+    setEditorStatus({ path: result.path });
 
     setText(result.data);
   });
@@ -30,7 +30,7 @@ export function Editor() {
       const newPath = await saveFileAs(data);
 
       if (newPath) {
-        editorStatus.value = { ...editorStatus.value, path: newPath };
+        setEditorStatus({ path: newPath });
       }
     }
   });

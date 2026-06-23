@@ -1,6 +1,6 @@
 import { EditorView } from 'codemirror';
 
-import { type EditorStatus, editorStatus } from '@/stores/editor';
+import { type EditorStatus, setEditorStatus } from '@/stores/editor';
 
 function readStatus(view: EditorView): Omit<EditorStatus, 'path'> {
   const position = view.state.selection.main.head;
@@ -16,5 +16,5 @@ function readStatus(view: EditorView): Omit<EditorStatus, 'path'> {
 }
 
 export const status = EditorView.updateListener.of(update => {
-  editorStatus.value = { ...editorStatus.value, ...readStatus(update.view) };
+  setEditorStatus(readStatus(update.view));
 });

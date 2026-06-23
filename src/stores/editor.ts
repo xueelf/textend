@@ -1,4 +1,19 @@
 import { signal } from '@preact/signals';
 
-/** 当前打开的文档路径，未打开时为 null。 */
-export const filePath = signal<string | null>(null);
+export type LineEnding = 'LF' | 'CRLF';
+
+export interface EditorStatus {
+  path: string | null;
+  line: number;
+  column: number;
+  encoding: string;
+  lineEnding: LineEnding;
+}
+
+export const editorStatus = signal<EditorStatus>({
+  path: null,
+  line: 1,
+  column: 1,
+  encoding: 'UTF-8',
+  lineEnding: 'LF',
+});

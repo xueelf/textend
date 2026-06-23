@@ -15,32 +15,3 @@ export function setLineSelection(view: EditorView, lineNumber: number) {
     selection: EditorSelection.range(line.from, length),
   });
 }
-
-/**
- * 获取光标所在位置的行号和列号。
- *
- * @param view - CodeMirror EditorView 实例
- * @returns 行号（1-based）与列号（1-based）
- */
-export function cursorPosition(view: EditorView): {
-  line: number;
-  column: number;
-} {
-  const pos = view.state.selection.main.head;
-  const line = view.state.doc.lineAt(pos);
-
-  return {
-    line: line.number,
-    column: pos - line.from + 1,
-  };
-}
-
-/**
- * 计算文档的 UTF-8 字节大小。
- *
- * @param view - CodeMirror EditorView 实例
- * @returns 字节数
- */
-export function byteSize(view: EditorView): number {
-  return new TextEncoder().encode(view.state.doc.toString()).length;
-}

@@ -51,7 +51,7 @@ function fromEvent(event: KeyboardEvent): string | null {
 /**
  * 注册一个全局快捷键。
  *
- * 快捷键格式为 `Mod-Key`（Mod 在 macOS 为 ⌘、Windows/Linux 为 Ctrl），
+ * 快捷键格式为 `Mod-Key`（Mod 在 macOS 为 Command、Windows/Linux 为 Ctrl），
  * 单字母键小写，命名键（如 Enter）保持原样。
  * 示例：`Mod-w`、`Mod-Shift-s`。
  *

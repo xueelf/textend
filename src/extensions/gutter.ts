@@ -3,7 +3,7 @@ import { BlockInfo, EditorView, lineNumbers } from '@codemirror/view';
 
 import { setLineSelection } from '@/utils/editor';
 
-// 行号区域 mousedown 事件处理：阻止默认行为并选中整行。
+// 行号区域 mousedown 事件处理，阻止默认行为并选中整行。
 function selectLineOnMouseDown(
   view: EditorView,
   block: BlockInfo,

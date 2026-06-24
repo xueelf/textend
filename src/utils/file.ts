@@ -1,7 +1,7 @@
 import { open, save } from '@tauri-apps/plugin-dialog';
 import { readTextFile, writeTextFile } from '@tauri-apps/plugin-fs';
 
-/** 打开文件的结果：绝对路径与已读取的文本内容。 */
+/** 打开文件的结果，绝对路径与已读取的文本内容。 */
 export interface FileRecord {
   path: string;
   data: string;

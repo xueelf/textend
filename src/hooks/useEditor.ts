@@ -1,13 +1,13 @@
-import { getCurrentWindow } from '@tauri-apps/api/window';
 import { readTextFile } from '@tauri-apps/plugin-fs';
 import { EditorView, minimalSetup } from 'codemirror';
 import { useRef } from 'preact/hooks';
 
 import { gutter } from '@/extensions/gutter';
+import { session } from '@/extensions/session';
 import { status } from '@/extensions/status';
-import { editorStatus, setEditorStatus } from '@/stores/editor';
+import { setEditorStatus } from '@/stores/editor';
 import { setLineSelection } from '@/utils/editor';
-import { loadSession, saveSession } from '@/utils/session';
+import { loadSession } from '@/utils/session';
 
 /**
  * CodeMirror 编辑器操作 hook。
@@ -18,39 +18,31 @@ export function useEditor() {
   const viewRef = useRef<EditorView | null>(null);
 
   /**
-   * 在指定 DOM 容器中初始化 CodeMirror 编辑器，
-   * 恢复上次会话并注册窗口关闭前保存逻辑。
+   * 在指定 DOM 容器中初始化 CodeMirror 编辑器。
    *
    * @param container - 用于挂载编辑器的 DOM 元素
    */
   async function initEditor(container: HTMLDivElement) {
     viewRef.current = new EditorView({
-      extensions: [gutter, minimalSetup, status],
+      extensions: [gutter, minimalSetup, status, session],
       parent: container,
     });
 
-    await getCurrentWindow().onCloseRequested(async () => {
-      await saveSession({
-        path: editorStatus.value.path,
-        text: getText(),
-      });
-    });
+    const prevSession = await loadSession();
 
-    const session = await loadSession();
-
-    if (session) {
-      if (session.path) {
+    if (prevSession) {
+      if (prevSession.path) {
         try {
-          const text = await readTextFile(session.path);
+          const text = await readTextFile(prevSession.path);
 
           setText(text);
-          setEditorStatus({ path: session.path });
+          setEditorStatus({ path: prevSession.path });
         } catch {
-          setText(session.text);
+          setText(prevSession.text);
           setEditorStatus({ path: null });
         }
       } else {
-        setText(session.text);
+        setText(prevSession.text);
       }
     }
   }

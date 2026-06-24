@@ -2,7 +2,7 @@ import { EditorView } from 'codemirror';
 
 import { type EditorStatus, setEditorStatus } from '@/stores/editor';
 
-// 从 EditorView 中提取光标位置和文档编码信息。
+// 从 EditorView 读取光标位置和编码。
 function readStatus(view: EditorView): Omit<EditorStatus, 'path'> {
   const position = view.state.selection.main.head;
   const line = view.state.doc.lineAt(position);
@@ -16,7 +16,7 @@ function readStatus(view: EditorView): Omit<EditorStatus, 'path'> {
   };
 }
 
-/** 光标位置与文档信息监听器，每次编辑器状态变化时更新 status signal。 */
+/** 光标位置与文档信息监听器，在编辑器状态变化时更新 status signal。 */
 export const status = EditorView.updateListener.of(update => {
   setEditorStatus(readStatus(update.view));
 });

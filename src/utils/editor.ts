@@ -2,9 +2,9 @@ import { EditorSelection } from '@codemirror/state';
 import { EditorView } from 'codemirror';
 
 /**
- * 选中指定行号的整行文本。
+ * 选中指定行的内容。
  *
- * @param view       - CodeMirror EditorView 实例
+ * @param view - EditorView
  * @param lineNumber - 行号（从 1 开始）
  */
 export function setLineSelection(view: EditorView, lineNumber: number) {

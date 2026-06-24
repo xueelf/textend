@@ -19,9 +19,9 @@ export const editorStatus = signal<EditorStatus>({
 });
 
 /**
- * 合并更新编辑器状态，仅覆盖传入的字段。
+ * 合并更新 editorStatus。
  *
- * @param partial - 要更新的部分字段
+ * @param partial - 要更新的字段
  */
 export function setEditorStatus(partial: Partial<EditorStatus>) {
   editorStatus.value = { ...editorStatus.value, ...partial };

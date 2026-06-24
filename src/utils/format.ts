@@ -2,7 +2,7 @@
  * 将字节数格式化为可读的字符串。
  *
  * @param bytes - 字节数
- * @returns 带单位的字符串（B / KB / MB / GB）
+ * @returns 带单位的字符串
  */
 export function formatBytes(bytes: number): string {
   if (bytes < 1024) {

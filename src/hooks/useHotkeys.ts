@@ -1,9 +1,9 @@
-/** 快捷键回调函数类型。 */
+/** 快捷键回调类型。 */
 type Handler = (event: KeyboardEvent) => void;
 
 const registry = new Map<string, Handler>();
 
-// 将原始输入标准化为 "Mod-Key" 格式，支持 `cmd-w`、`Meta-W` 等写法。
+// 把用户输入的快捷键字符串规范化为 Mod-Key 格式，支持 cmd-w / Meta-W 等写法。
 function normalize(raw: string): string {
   const parts = raw.split('-');
   const key = parts.pop() ?? '';
@@ -23,7 +23,7 @@ function normalize(raw: string): string {
   return ordered.join('-');
 }
 
-// 从 KeyboardEvent 提取标准格式快捷键字符串。
+// 从 KeyboardEvent 提取标准化的快捷键字符串。
 function fromEvent(event: KeyboardEvent): string | null {
   const { key, ctrlKey, altKey, metaKey, shiftKey } = event;
 
@@ -49,24 +49,24 @@ function fromEvent(event: KeyboardEvent): string | null {
 }
 
 /**
- * 注册一个全局快捷键。
+ * 注册全局快捷键。
  *
- * 快捷键格式为 `Mod-Key`（Mod 在 macOS 为 Command、Windows/Linux 为 Ctrl），
- * 单字母键小写，命名键（如 Enter）保持原样。
+ * 格式：`Mod-Key`。Mod 在 macOS 映射到 Cmd，Windows/Linux 映射到 Ctrl。
+ * 单字母键小写，命名键（Escape、Enter 等）保持原样。
  * 示例：`Mod-w`、`Mod-Shift-s`。
  *
- * @param hotkeys - 快捷键字符串，格式 `Mod-Key`
- * @param callback - 触发时调用的回调函数，接收原始 KeyboardEvent
+ * @param hotkeys - 快捷键字符串，格式为 `Mod-Key`
+ * @param callback - 触发时的回调，接收原始 KeyboardEvent
  */
 export function useHotkeys(hotkeys: string, callback: Handler) {
   registry.set(normalize(hotkeys), callback);
 }
 
 /**
- * 将键盘事件分发到已注册的快捷键处理器。
- * 由 HotkeysProvider 内部调用，应用代码一般不需要直接使用。
+ * 将键盘事件派发给已注册的快捷键处理器。
+ * 由 HotkeysProvider 调用。
  *
- * @param event - 浏览器 KeyboardEvent
+ * @param event - KeyboardEvent
  */
 export function dispatch(event: KeyboardEvent) {
   const key = fromEvent(event);

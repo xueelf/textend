@@ -9,8 +9,12 @@ const cursorText = computed(
 export function StatusBar() {
   const { path, encoding, lineEnding } = editorStatus.value;
 
+  function handleMouseDown(event: MouseEvent) {
+    event.preventDefault();
+  }
+
   return (
-    <footer class="status-bar">
+    <footer class="status-bar" onMouseDown={handleMouseDown}>
       {path && <span class="status-bar__path">{path}</span>}
       <span class="status-bar__spacer" />
       <span class="status-bar__item">{cursorText}</span>
